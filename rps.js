@@ -3,6 +3,7 @@ function getComputerChoice() {
     //generate random number
     let choice = Math.floor(Math.random() *3)
     let hand = "pirate hook (error)";
+
     //switch case
     switch(choice) {
         case 0: //rock
@@ -18,11 +19,13 @@ function getComputerChoice() {
           hand = "pirate hook (error)";
           break;
       }
+
     return hand;
 }
 
 function playRound(playerSelection, computerSelection) {
     result = "error"; //default result
+    
     if(playerSelection == computerSelection) {
         result = "Draw.";
         return result;
