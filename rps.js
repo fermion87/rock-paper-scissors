@@ -1,3 +1,7 @@
+//init variables
+let score = 0;
+let comScore = 0;
+
 //functions
 function getComputerChoice() {   
     //generate random number
@@ -23,42 +27,60 @@ function getComputerChoice() {
     return hand;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
     result = "error"; //default result
-    
+    let computerSelection = getComputerChoice();
+
     if(playerSelection == computerSelection) {
-        result = "Draw.";
+        result = "Player: " + playerSelection + " | Computer: " + computerSelection + " | Draw. Player Score:" + score;
         return result;
     } else if(playerSelection == "rock" && computerSelection == "scissors") {
-        result = "Player wins.";
+        score++;
+        result = "Player: " + playerSelection + " | Computer: " + computerSelection + " | Player wins. Player Score:" + score;
         return result;
     } else if(playerSelection == "paper" && computerSelection == "rock") {
-        result = "Player wins.";
+        score++;
+        result = "Player: " + playerSelection + " | Computer: " + computerSelection + " | Player wins. Player Score:" + score;
         return result;
     } else if(playerSelection == "scissors" && computerSelection == "paper") {
-        result = "Player wins.";
+        score++;
+        result = "Player: " + playerSelection + " | Computer: " + computerSelection + " | Player wins. Player Score:" + score;
         return result;
     } else {
-        result = "Computer wins.";
+        result = "Player: " + playerSelection + " | Computer: " + computerSelection + " | Computer wins. Player Score:" + score;
         return result;
     }
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        //prompt player for choice
-        let playerSelection = prompt("Rock, paper, or scissors?");
+// function game() {
+//     //prompt player for choice
+//     let playerSelection = prompt("Rock, paper, or scissors?");
 
-        //determine computer selection
-        let computerSelection = getComputerChoice();
+//     //determine computer selection
+//     let computerSelection = getComputerChoice();
 
-        //determine winner
-        console.log("Player: " + playerSelection);
-        console.log("Computer: " + computerSelection);
-        console.log(playRound(playerSelection,computerSelection));
-     }
-}
+//     //determine winner
+//     console.log("Player: " + playerSelection);
+//     console.log("Computer: " + computerSelection);
+//     console.log(playRound(playerSelection,computerSelection));
+// }
 
-game();
+const buttons = document.querySelectorAll('button');
+const div = document.querySelector('div');
+
+buttons.forEach((button) => {
+
+    button.addEventListener('click', () => {
+        div.textContent = playRound(button.id);
+        if(score >= 5) {
+            div.textContent = "The player wins this round.";
+            div.setAttribute('style', 'font-weight: bold;');
+        }
+
+        //alert(button.id);
+    });
+});
+
+// game();
 
 
